@@ -3,13 +3,12 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
 
-<!--            This evaluator will excluding from logging all logs that have Dummy error in the log message. -->
+<!--            This evaluator will excluding from logging all logs that have Logging exception in the log message. -->
             <evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
 <!--                throwableProxy.getClassName().contains("...") has a bug and it's ignored in the filter when there are too many log messages -->
 <!--                <expression>return throwableProxy.getClassName().contains("RuntimeException");</expression>-->
                 <expression>return message.contains("Logging exception");</expression>
             </evaluator>
-            <OnMismatch>NEUTRAL</OnMismatch>
             <OnMatch>DENY</OnMatch>
         </filter>
         <encoder>
